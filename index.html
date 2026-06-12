@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Stress Reduction – Writing Task</title>
+    <style>
+        :root {
+            --bg: #f5f1ec;
+            --card-bg: #ffffff;
+            --primary: #4a6d5c;
+            --primary-dark: #365244;
+            --accent: #d4a76a;
+            --accent-light: #fdf3e4;
+            --text: #2c2c2c;
+            --text-light: #5c5c5c;
+            --border: #e0d8ce;
+            --danger: #c0392b;
+            --success: #2d7d46;
+            --info: #3a6d8c;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.10), 0 4px 10px rgba(0, 0, 0, 0.05);
+            --radius-sm: 6px;
+            --radius: 10px;
+            --radius-lg: 14px;
+            --font-heading: 'Georgia', 'Times New Roman', serif;
+            --font-body: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f7f3ed 0%, #f0ebe0 30%, #f5f1ec 60%, #faf7f3 100%);
+            background-attachment: fixed;
+            font-family: var(--font-body);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(180, 160, 130, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(140, 170, 150, 0.05) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(200, 180, 150, 0.04) 0%, transparent 70%);
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .header .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 28px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-md);
+        }
+        .header h1 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--primary-dark);
+            letter-spacing: -0.3px;
+            margin-bottom: 4px;
+        }
+        .header .subtitle {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 28px 30px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        .card h2 {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            color: var(--primary-dark);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card h2 .badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            font-family: var(--font-body);
+            flex-shrink: 0;
+        }
+        .card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .student-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .student-row .field {
+            flex: 1;
+            min-width: 200px;
+        }
+        .field label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: #444;
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: border-color var(--transition), box-shadow var(--transition);
+            background: #fafaf8;
+            color: var(--text);
+            resize: vertical;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 109, 92, 0.1);
+            background: #fff;
+        }
+        .field textarea {
+            min-height: 200px;
+            line-height: 1.7;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            background: #fafaf7;
+            border-radius: var(--radius-sm);
+            margin-bottom: 10px;
+            border: 1px solid transparent;
+            transition: all var(--transition);
+        }
+        .ranking-item:hover {
+            border-color: var(--border);
+            background: #fff;
+        }
+        .ranking-item .rank-label {
+            font-weight: 600;
+            color: var(--primary-dark);
+            flex: 1;
+            font-size: 0.95rem;
+        }
+        .ranking-item select {
+            width: 180px;
+            padding: 9px 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            background: #fff;
+            cursor: pointer;
+            transition: border-color var(--transition);
+        }
+        .ranking-item select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 109, 92, 0.08);
+        }
+        .ranking-item .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .rank-1 { background: #fde8e8; color: #a71d2a; }
+        .rank-2 { background: #fef3cd; color: #856404; }
+        .rank-3 { background: #d4edda; color: #155724; }
+
+        .transition-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0 6px;
+        }
+        .transition-chip {
+            display: inline-block;
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: default;
+            transition: all var(--transition);
+            border: 1.5px solid;
+        }
+        .chip-tier1 { background: #eef6f1; border-color: #b8d4c0; color: #2d5a3a; }
+        .chip-tier2 { background: #fef9f0; border-color: #e8d5b0; color: #6b4d2a; }
+        .chip-tier3 { background: #fdf0f0; border-color: #e8c0c0; color: #6b2020; }
+        .transition-chip:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+        .transition-legend {
+            display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.78rem; color: var(--text-light);
+            margin-top: 4px; margin-bottom: 8px;
+        }
+        .legend-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+        .dot-tier1 { background: #b8d4c0; } .dot-tier2 { background: #e8d5b0; } .dot-tier3 { background: #e8c0c0; }
+
+        .btn-row {
+            display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 8px;
+        }
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px;
+            border-radius: 30px; font-family: var(--font-body); font-size: 1rem; font-weight: 600;
+            cursor: pointer; border: none; transition: all var(--transition); letter-spacing: 0.2px;
+            position: relative; overflow: hidden;
+        }
+        .btn-primary {
+            background: var(--primary); color: #fff; box-shadow: var(--shadow-md);
+        }
+        .btn-primary:hover { background: var(--primary-dark); box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+        .btn-primary:active { transform: translateY(0); box-shadow: var(--shadow-sm); }
+        .btn-primary:disabled { background: #a0b5a8; cursor: not-allowed; box-shadow: none; transform: none; }
+        .btn-outline { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+        .btn-outline:hover { background: #f5f9f6; border-color: var(--primary-dark); }
+        .btn .spinner {
+            display: none; width: 18px; height: 18px;
+            border: 2.5px solid rgba(255,255,255,0.4); border-top-color: #fff;
+            border-radius: 50%; animation: spin 0.7s linear infinite;
+        }
+        .btn-primary:disabled .spinner { display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .results-panel {
+            display: none; background: #fafff9; border: 2px solid #c8e0cf;
+            border-radius: var(--radius-lg); padding: 24px 28px; margin-top: 20px;
+            animation: fadeSlideIn 0.4s ease;
+        }
+        .results-panel.visible { display: block; }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        .results-panel h3 { font-family: var(--font-heading); color: var(--success); margin-bottom: 14px; font-size: 1.15rem; }
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 16px; }
+        .score-item { background: #fff; border-radius: var(--radius-sm); padding: 14px 16px; text-align: center; border: 1px solid #e8ece8; }
+        .score-item .score-value { font-size: 2rem; font-weight: 700; color: var(--primary-dark); font-family: var(--font-heading); }
+        .score-item .score-label { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+        .score-item.pass { border-left: 4px solid var(--success); }
+        .score-item.fail { border-left: 4px solid var(--danger); }
+        .score-item.partial { border-left: 4px solid #e0a030; }
+        .total-score { text-align: center; font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); padding: 16px; background: #fff; border-radius: var(--radius); border: 2px dashed #c8dcc8; margin-top: 10px; }
+        .total-score .big-number { font-size: 3rem; display: block; line-height: 1; color: var(--primary); }
+        .feedback-msg { margin-top: 10px; font-style: italic; color: var(--text-light); text-align: center; }
+
+        .toast {
+            position: fixed; bottom: 30px; right: 30px; background: #2c2c2c; color: #fff;
+            padding: 14px 22px; border-radius: 30px; font-size: 0.9rem; font-weight: 500;
+            z-index: 999; opacity: 0; transform: translateY(20px); pointer-events: none;
+            transition: all 0.35s ease; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background: #2d7d46; } .toast.error { background: #c0392b; }
+
+        .field.error input, .field.error textarea, .field.error select {
+            border-color: var(--danger) !important;
+            box-shadow: 0 0 0 3px rgba(192,57,43,0.08) !important;
+        }
+        .field .error-msg { color: var(--danger); font-size: 0.8rem; margin-top: 3px; display: none; }
+        .field.error .error-msg { display: block; }
+
+        .example-text {
+            display: block; margin-top: 6px; color: #6b6b6b; font-style: italic;
+            background: #fdfbf7; padding: 8px 12px; border-left: 3px solid #d4a76a;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 0.88rem;
+        }
+
+        @media (max-width: 640px) {
+            .card { padding: 18px 16px; }
+            .header h1 { font-size: 1.5rem; }
+            .ranking-item { flex-wrap: wrap; gap: 8px; }
+            .ranking-item select { width: 100%; }
+            .btn { width: 100%; justify-content: center; padding: 14px 20px; }
+            .student-row { flex-direction: column; gap: 10px; }
+            .score-grid { grid-template-columns: 1fr; }
+            .transition-bank { gap: 6px; }
+            .transition-chip { font-size: 0.78rem; padding: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="icon-circle">📝</div>
+            <h1>Three Ways to Reduce Academic Stress</h1>
+            <p class="subtitle">Writing Assessment &mdash; Paragraph Construction Task</p>
+        </div>
+
+        <!-- Student Info -->
+        <div class="card" id="card-student-info">
+            <h2><span class="badge">👥</span> Group Member Names</h2>
+            <div class="student-row">
+                <div class="field" id="field-student1">
+                    <label for="student1">Student 1 (Full Name)</label>
+                    <input type="text" id="student1" placeholder="e.g., Maria Santos" autocomplete="off">
+                    <span class="error-msg">Please enter the name of Student 1.</span>
+                </div>
+                <div class="field" id="field-student2">
+                    <label for="student2">Student 2 (Full Name)</label>
+                    <input type="text" id="student2" placeholder="e.g., Juan Dela Cruz" autocomplete="off">
+                    <span class="error-msg">Please enter the name of Student 2.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ranking Card -->
+        <div class="card" id="card-ranking">
+            <h2><span class="badge">1</span> Rank the Three Methods</h2>
+            <p style="color: var(--text-light); margin-bottom: 14px; font-size: 0.9rem;">
+                Rank from <strong>least effective (Rank 1)</strong> to <strong>most effective (Rank 3)</strong>. Each rank must be used exactly once.
+            </p>
+            <div class="ranking-item" id="rank-item-sleep">
+                <span class="rank-label">😴 Get enough sleep (7–9 hours)</span>
+                <select id="rank-sleep" class="rank-select" data-method="sleep">
+                    <option value="">-- Select Rank --</option>
+                    <option value="1">Rank 1 – Least Effective</option>
+                    <option value="2">Rank 2 – Moderately Effective</option>
+                    <option value="3">Rank 3 – Most Effective</option>
+                </select>
+                <span class="rank-badge" id="badge-sleep" style="display:none;"></span>
+            </div>
+            <div class="ranking-item" id="rank-item-talk">
+                <span class="rank-label">💬 Talk to a friend or counselor</span>
+                <select id="rank-talk" class="rank-select" data-method="talk">
+                    <option value="">-- Select Rank --</option>
+                    <option value="1">Rank 1 – Least Effective</option>
+                    <option value="2">Rank 2 – Moderately Effective</option>
+                    <option value="3">Rank 3 – Most Effective</option>
+                </select>
+                <span class="rank-badge" id="badge-talk" style="display:none;"></span>
+            </div>
+            <div class="ranking-item" id="rank-item-break">
+                <span class="rank-label">📋 Break large tasks into small steps</span>
+                <select id="rank-break" class="rank-select" data-method="break">
+                    <option value="">-- Select Rank --</option>
+                    <option value="1">Rank 1 – Least Effective</option>
+                    <option value="2">Rank 2 – Moderately Effective</option>
+                    <option value="3">Rank 3 – Most Effective</option>
+                </select>
+                <span class="rank-badge" id="badge-break" style="display:none;"></span>
+            </div>
+            <div class="field" id="field-justification" style="margin-top: 14px;">
+                <label for="justification">Justify your ranking in <strong>one sentence</strong>:</label>
+                <textarea id="justification" rows="2" placeholder="Explain why you ranked them this way..."></textarea>
+                <span class="error-msg">Please provide a one-sentence justification for your ranking.</span>
+                <small class="example-text">
+                    💡 <strong>Example:</strong> "I ranked breaking tasks as the most effective because it directly reduces the source of stress, while talking provides emotional relief, and sleep offers physical restoration."
+                </small>
+            </div>
+            <div id="rank-error" style="color: var(--danger); font-size: 0.85rem; margin-top: 6px; display: none;">
+                ⚠️ Please assign each rank (1, 2, and 3) exactly once. No duplicates or empty selections allowed.
+            </div>
+        </div>
+
+        <!-- Transition Bank -->
+        <div class="card" id="card-transitions">
+            <h2><span class="badge">📌</span> Advanced Transition Bank</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 10px;">
+                You <strong>must use at least two</strong> of these transitions in your paragraph.
+            </p>
+            <div class="transition-legend">
+                <span><span class="legend-dot dot-tier1"></span> Tier 1 – Introducing: To begin with, First of all, One useful way</span>
+                <span><span class="legend-dot dot-tier2"></span> Tier 2 – Emphasizing: More significantly, Even more importantly, Furthermore</span>
+                <span><span class="legend-dot dot-tier3"></span> Tier 3 – Climax: The most effective method, The most crucial reason, Above all</span>
+            </div>
+            <div class="transition-bank">
+                <span class="transition-chip chip-tier1">To begin with</span>
+                <span class="transition-chip chip-tier1">First of all</span>
+                <span class="transition-chip chip-tier1">One useful way</span>
+                <span class="transition-chip chip-tier2">More significantly</span>
+                <span class="transition-chip chip-tier2">Even more importantly</span>
+                <span class="transition-chip chip-tier2">Furthermore</span>
+                <span class="transition-chip chip-tier3">The most effective method</span>
+                <span class="transition-chip chip-tier3">The most crucial reason</span>
+                <span class="transition-chip chip-tier3">Above all</span>
+            </div>
+        </div>
+
+        <!-- Paragraph Writing -->
+        <div class="card" id="card-paragraph">
+            <h2><span class="badge">2</span> Write Your Paragraph</h2>
+            <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 6px;">
+                Compose a paragraph of <strong>8–10 sentences</strong> that includes:
+            </p>
+            <ul style="color: var(--text-light); font-size: 0.88rem; margin-bottom: 14px; padding-left: 20px; line-height: 1.7;">
+                <li>A <strong>topic sentence</strong> mentioning all three ways.</li>
+                <li>The three points in your chosen <strong>logical order</strong> (least → most effective).</li>
+                <li>At least <strong>two advanced transitions</strong> from the bank.</li>
+                <li>A <strong>concluding sentence</strong> that restates the main idea and emphasizes the most effective method.</li>
+            </ul>
+            <div class="field" id="field-paragraph">
+                <label for="paragraph">Your Paragraph:</label>
+                <textarea id="paragraph" rows="14" placeholder="Write your paragraph here..."></textarea>
+                <span class="error-msg">Please write your paragraph. It should contain 8–10 sentences.</span>
+            </div>
+            <small id="live-sentence-count" style="color: var(--text-light); font-size: 0.8rem; display: block; margin-top: 4px;">📏 Start typing to see sentence count.</small>
+        </div>
+
+        <!-- Buttons -->
+        <div class="btn-row">
+            <button class="btn btn-outline" id="btn-reset" type="button">🔄 Reset Form</button>
+            <button class="btn btn-primary" id="btn-submit" type="button">
+                <span class="spinner"></span> ✅ Submit for Scoring
+            </button>
+        </div>
+
+        <!-- Results -->
+        <div class="results-panel" id="results-panel">
+            <h3>📊 Scoring Results</h3>
+            <div class="score-grid" id="score-grid"></div>
+            <div class="total-score" id="total-score"></div>
+            <p class="feedback-msg" id="feedback-msg"></p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function() {
+            // ==================== CONFIGURATION ====================
+            const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzjGca2MMt_gZ4XzxHR_O6J-YDkc2oL_VUKphCpFURnQLx8_ylEjtr3MnBaUCmX2Vm9VQ/exec';
+            // =========================================================
+
+            const student1Input = document.getElementById('student1');
+            const student2Input = document.getElementById('student2');
+            const rankSleep = document.getElementById('rank-sleep');
+            const rankTalk = document.getElementById('rank-talk');
+            const rankBreak = document.getElementById('rank-break');
+            const justificationInput = document.getElementById('justification');
+            const paragraphInput = document.getElementById('paragraph');
+            const btnSubmit = document.getElementById('btn-submit');
+            const btnReset = document.getElementById('btn-reset');
+            const resultsPanel = document.getElementById('results-panel');
+            const scoreGrid = document.getElementById('score-grid');
+            const totalScoreDiv = document.getElementById('total-score');
+            const feedbackMsg = document.getElementById('feedback-msg');
+            const toast = document.getElementById('toast');
+            const rankError = document.getElementById('rank-error');
+            const liveSentenceCount = document.getElementById('live-sentence-count');
+            const allBadges = {
+                sleep: document.getElementById('badge-sleep'),
+                talk: document.getElementById('badge-talk'),
+                break: document.getElementById('badge-break'),
+            };
+
+            const fieldStudent1 = document.getElementById('field-student1');
+            const fieldStudent2 = document.getElementById('field-student2');
+            const fieldJustification = document.getElementById('field-justification');
+            const fieldParagraph = document.getElementById('field-paragraph');
+
+            const transitionPhrases = [
+                'to begin with','first of all','one useful way',
+                'more significantly','even more importantly','furthermore',
+                'the most effective method','the most crucial reason','above all'
+            ];
+
+            const methodKeywords = {
+                sleep: ['sleep', '7-9 hours', '7–9 hours', 'rest', 'enough sleep', 'adequate sleep', 'sleeping', 'bedtime', 'rested'],
+                talk: ['talk', 'friend', 'counselor', 'counsellor', 'speak', 'share', 'confide', 'social support', 'someone', 'speaking', 'talking', 'conversation', 'emotional support', 'vent'],
+                break: ['break', 'small steps', 'smaller steps', 'chunk', 'divide', 'manageable', 'large tasks', 'breaking down', 'step by step', 'incremental', 'pieces', 'segments', 'task management']
+            };
+
+            let toastTimer;
+            function showToast(message, type = '') {
+                clearTimeout(toastTimer);
+                toast.textContent = message;
+                toast.className = 'toast ' + type + ' show';
+                toastTimer = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            }
+
+            function updateBadges() {
+                const selects = { sleep: rankSleep.value, talk: rankTalk.value, break: rankBreak.value };
+                for (const [method, value] of Object.entries(selects)) {
+                    const badge = allBadges[method];
+                    if (value && ['1','2','3'].includes(value)) {
+                        badge.style.display = 'inline-flex';
+                        badge.textContent = value;
+                        badge.className = 'rank-badge rank-' + value;
+                    } else {
+                        badge.style.display = 'none';
+                        badge.textContent = '';
+                        badge.className = 'rank-badge';
+                    }
+                }
+                validateRanks();
+            }
+
+            function validateRanks() {
+                const values = [rankSleep.value, rankTalk.value, rankBreak.value];
+                const allFilled = values.every(v => ['1','2','3'].includes(v));
+                const unique = new Set(values).size === 3;
+                if (allFilled && unique) { rankError.style.display = 'none'; return true; }
+                else if (values.some(v => v !== '') && !(allFilled && unique)) { rankError.style.display = 'block'; return false; }
+                else { rankError.style.display = 'none'; return false; }
+            }
+
+            document.querySelectorAll('.rank-select').forEach(select => {
+                select.addEventListener('change', updateBadges);
+            });
+
+            function clearAllErrors() {
+                [fieldStudent1, fieldStudent2, fieldJustification, fieldParagraph].forEach(f => f.classList.remove('error'));
+                rankError.style.display = 'none';
+            }
+
+            function resetForm() {
+                student1Input.value = '';
+                student2Input.value = '';
+                rankSleep.value = '';
+                rankTalk.value = '';
+                rankBreak.value = '';
+                justificationInput.value = '';
+                paragraphInput.value = '';
+                updateBadges();
+                clearAllErrors();
+                resultsPanel.classList.remove('visible');
+                scoreGrid.innerHTML = '';
+                totalScoreDiv.innerHTML = '';
+                feedbackMsg.textContent = '';
+                liveSentenceCount.textContent = '📏 Start typing to see sentence count.';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                showToast('Form has been reset.', '');
+            }
+            btnReset.addEventListener('click', resetForm);
+
+            function normalizeText(text) {
+                return text.replace(/\s+/g, ' ').trim();
+            }
+
+            // ---- Robust sentence counter (handles abbreviations, double spaces) ----
+            function countSentences(text) {
+                const cleaned = normalizeText(text);
+                if (!cleaned) return 0;
+                const abbreviations = [
+                    'Mr','Mrs','Ms','Dr','Prof','Sr','Jr','St','Ave','Rd','Blvd',
+                    'etc','e\\.g','i\\.e','vs','Jan','Feb','Mar','Apr','Jun','Jul',
+                    'Aug','Sep','Oct','Nov','Dec','Dept','Univ','Inc','Ltd','Co',
+                    'Ph\\.D','M\\.D','B\\.A','M\\.A','B\\.S'
+                ];
+                const abbrPattern = abbreviations.join('|');
+                const sentenceBoundary = new RegExp(
+                    `(?<!\\b(?:${abbrPattern}))[.!?](?=\\s+[A-Z0-9])`, 'g'
+                );
+                const sentences = cleaned.split(sentenceBoundary).filter(s => s.trim().length > 0);
+                return sentences.length || 0;
+            }
+
+            // ---- Transition detection ----
+            function findTransitions(text) {
+                const lower = text.toLowerCase();
+                return transitionPhrases.filter(p => lower.includes(p));
+            }
+
+            // ---- Topic sentence check (refined) ----
+            function checkTopicSentence(paragraph) {
+                const normalized = normalizeText(paragraph);
+                const abbrPattern = '(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|St|Ave|Rd|Blvd|etc|e\\.g|i\\.e|vs|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec|Dept|Univ)';
+                const boundaryRegex = new RegExp(`(?<!\\b${abbrPattern})[.!?](?=\\s+[A-Z0-9])`, 'g');
+                const sentences = normalized.split(boundaryRegex).filter(s => s.trim().length > 3);
+                if (sentences.length === 0) return { pass: false, details: 'No sentences detected.' };
+
+                const firstThree = sentences.slice(0, 3);
+                const allMethods = ['sleep', 'talk', 'break'];
+                const found = { sleep: false, talk: false, break: false };
+
+                for (const sentence of firstThree) {
+                    const lower = sentence.toLowerCase();
+                    for (const method of allMethods) {
+                        if (found[method]) continue;
+                        if (methodKeywords[method].some(kw => lower.includes(kw))) {
+                            found[method] = true;
+                        }
+                    }
+                }
+
+                const allFound = Object.values(found).every(v => v);
+                const foundCount = Object.values(found).filter(v => v).length;
+                if (allFound) {
+                    return { pass: true, details: `Topic sentence mentions all 3 methods. (${foundCount}/3)` };
+                } else {
+                    const missing = Object.entries(found).filter(([,v])=>!v).map(([k])=>k).join(', ');
+                    return { pass: false, details: `Topic sentence covers only ${foundCount}/3 methods. Missing: ${missing}` };
+                }
+            }
+
+            // ---- Concluding sentence check (now uses ranking) ----
+            function checkConcludingSentence(paragraph, mostEffectiveMethod) {
+                const normalized = normalizeText(paragraph);
+                const abbrPattern = '(?:Mr|Mrs|Ms|Dr|Prof|Sr|Jr|St|Ave|Rd|Blvd|etc|e\\.g|i\\.e|vs|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec|Dept|Univ)';
+                const boundaryRegex = new RegExp(`(?<!\\b${abbrPattern})[.!?](?=\\s+[A-Z0-9])`, 'g');
+                const sentences = normalized.split(boundaryRegex).filter(s => s.trim().length > 3);
+                if (sentences.length < 2) return { pass: false, details: 'Paragraph too short for a concluding sentence.' };
+
+                const lastTwo = sentences.slice(-2).map(s => s.toLowerCase());
+                const concludingStarters = [
+                    'in conclusion','to sum up','ultimately','therefore','thus','in summary',
+                    'as a result','consequently','to conclude','overall','all in all','in short',
+                    'clearly','indeed','without a doubt','the most effective','above all','most important'
+                ];
+                const emphasisPhrases = [
+                    'most effective','best method','most important','most crucial','above all',
+                    'greatest impact','most beneficial','most helpful','most powerful','most valuable',
+                    'key','essential','primary','foremost','strongest','optimal'
+                ];
+
+                let hasConcluding = concludingStarters.some(s => lastTwo.some(t => t.includes(s)));
+                let hasEmphasis = emphasisPhrases.some(s => lastTwo.some(t => t.includes(s)));
+
+                // Check if most effective method (from ranking) appears in last two sentences
+                if (mostEffectiveMethod && methodKeywords[mostEffectiveMethod]) {
+                    const methodMentioned = methodKeywords[mostEffectiveMethod].some(kw =>
+                        lastTwo.some(t => t.includes(kw))
+                    );
+                    if (methodMentioned) hasEmphasis = true; // strong signal
+                }
+
+                if (hasConcluding && hasEmphasis) {
+                    return { pass: true, details: 'Concluding sentence with emphasis detected.' };
+                } else if (hasConcluding && !hasEmphasis) {
+                    return { pass: false, details: 'Concluding structure found, but emphasis on most effective method is unclear.' };
+                } else if (!hasConcluding && hasEmphasis) {
+                    return { pass: false, details: 'Emphasis found, but no clear concluding transition.' };
+                } else {
+                    return { pass: false, details: 'No clear concluding sentence with emphasis.' };
+                }
+            }
+
+            // ---- All methods coverage check ----
+            function checkAllMethodsCovered(paragraph) {
+                const lower = paragraph.toLowerCase();
+                const results = {};
+                for (const [method, keywords] of Object.entries(methodKeywords)) {
+                    results[method] = keywords.some(kw => lower.includes(kw));
+                }
+                const covered = Object.values(results).filter(v => v).length;
+                const missing = Object.entries(results).filter(([,v])=>!v).map(([k])=>k);
+                return {
+                    pass: covered === 3,
+                    covered,
+                    missing,
+                    details: covered === 3 ? 'All 3 methods covered.' : `Only ${covered}/3 methods covered. Missing: ${missing.join(', ')}`
+                };
+            }
+
+            function getRankingOrder() {
+                const ranking = {};
+                const s = parseInt(rankSleep.value), t = parseInt(rankTalk.value), b = parseInt(rankBreak.value);
+                if (isNaN(s)||isNaN(t)||isNaN(b)) return null;
+                ranking[s] = 'sleep'; ranking[t] = 'talk'; ranking[b] = 'break';
+                return {
+                    order: [ranking[1], ranking[2], ranking[3]],
+                    mostEffective: ranking[3],
+                    leastEffective: ranking[1]
+                };
+            }
+
+            // ---- Main scoring function ----
+            function scoreParagraph(paragraph, rankingData) {
+                const sentenceCount = countSentences(paragraph);
+                const transitionsFound = findTransitions(paragraph);
+                const topicCheck = checkTopicSentence(paragraph);
+                const concludingCheck = checkConcludingSentence(paragraph, rankingData?.mostEffective);
+                const allMethodsCheck = checkAllMethodsCovered(paragraph);
+
+                let score = 0;
+                const breakdown = [];
+
+                // 1. Sentence count (0-20)
+                let sentenceScore = 0, sentenceDetail = '';
+                if (sentenceCount >= 8 && sentenceCount <= 10) {
+                    sentenceScore = 20; sentenceDetail = `✅ ${sentenceCount} sentences (perfect 8-10).`;
+                } else if (sentenceCount >= 6 && sentenceCount <= 12) {
+                    sentenceScore = 12; sentenceDetail = `⚠️ ${sentenceCount} sentences (close, partial credit).`;
+                } else if (sentenceCount > 0) {
+                    sentenceScore = 5; sentenceDetail = `❌ ${sentenceCount} sentences (outside 8-10).`;
+                } else {
+                    sentenceScore = 0; sentenceDetail = '❌ No sentences.';
+                }
+                score += sentenceScore;
+                breakdown.push({ label: 'Sentence Count (8-10)', score: sentenceScore, max: 20, detail: sentenceDetail, status: sentenceScore>=20?'pass':sentenceScore>=10?'partial':'fail' });
+
+                // 2. Topic sentence (0-20)
+                let topicScore = topicCheck.pass ? 20 : (topicCheck.details.includes('2/3') ? 12 : (topicCheck.details.includes('1/3') ? 6 : 2));
+                score += topicScore;
+                breakdown.push({ label: 'Topic Sentence (all 3 methods)', score: topicScore, max: 20, detail: topicCheck.details, status: topicScore>=20?'pass':topicScore>=10?'partial':'fail' });
+
+                // 3. Transitions (0-20)
+                let transitionScore = 0, transitionDetail = '';
+                if (transitionsFound.length >= 2) {
+                    transitionScore = 20; transitionDetail = `✅ ${transitionsFound.length} transitions: "${transitionsFound.join('", "')}".`;
+                } else if (transitionsFound.length === 1) {
+                    transitionScore = 10; transitionDetail = `⚠️ Only 1 transition ("${transitionsFound[0]}"). Need at least 2.`;
+                } else {
+                    transitionScore = 0; transitionDetail = '❌ No advanced transitions used.';
+                }
+                score += transitionScore;
+                breakdown.push({ label: 'Advanced Transitions (≥2)', score: transitionScore, max: 20, detail: transitionDetail, status: transitionScore>=20?'pass':transitionScore>=10?'partial':'fail' });
+
+                // 4. Concluding sentence (0-20)
+                let concludingScore = concludingCheck.pass ? 20 : (concludingCheck.details.includes('unclear') ? 10 : 5);
+                score += concludingScore;
+                breakdown.push({ label: 'Concluding Sentence + Emphasis', score: concludingScore, max: 20, detail: concludingCheck.details, status: concludingScore>=20?'pass':concludingScore>=8?'partial':'fail' });
+
+                // 5. All methods coverage (0-20)
+                let coverageScore = allMethodsCheck.pass ? 20 : (allMethodsCheck.covered >= 2 ? 12 : 4);
+                score += coverageScore;
+                breakdown.push({ label: 'All 3 Methods Covered', score: coverageScore, max: 20, detail: allMethodsCheck.details, status: coverageScore>=20?'pass':coverageScore>=10?'partial':'fail' });
+
+                return { totalScore: score, maxTotal: 100, breakdown, sentenceCount, transitionsFound, rankingData };
+            }
+
+            function displayResults(result) {
+                scoreGrid.innerHTML = '';
+                result.breakdown.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'score-item ' + item.status;
+                    div.innerHTML = `
+                        <div class="score-value">${item.score}<span style="font-size:0.7em;color:#999;">/${item.max}</span></div>
+                        <div class="score-label"><strong>${item.label}</strong></div>
+                        <div style="font-size:0.78rem;color:var(--text-light);margin-top:4px;">${item.detail}</div>
+                    `;
+                    scoreGrid.appendChild(div);
+                });
+                const pct = Math.round((result.totalScore / result.maxTotal) * 100);
+                let emoji = '🌟', color = 'var(--success)';
+                if (pct < 50) { emoji = '📘'; color = 'var(--danger)'; }
+                else if (pct < 70) { emoji = '📗'; color = '#e0a030'; }
+                else if (pct < 85) { emoji = '📙'; color = 'var(--info)'; }
+                totalScoreDiv.innerHTML = `
+                    <span style="font-size:0.9rem;">Total Score</span>
+                    <span class="big-number" style="color:${color};">${emoji} ${result.totalScore}<span style="font-size:0.45em;"> / ${result.maxTotal}</span></span>
+                    <span style="font-size:0.85rem;">(${pct}%)</span>
+                `;
+                if (pct >= 85) feedbackMsg.textContent = 'Excellent paragraph! Clear structure, transitions, and a strong conclusion.';
+                else if (pct >= 70) feedbackMsg.textContent = 'Good work. Review the breakdown to improve transitions or the concluding emphasis.';
+                else if (pct >= 50) feedbackMsg.textContent = 'Solid attempt. Ensure all three methods are clearly mentioned and use two transitions.';
+                else feedbackMsg.textContent = 'Keep practicing. Your paragraph needs more development in structure and transitions.';
+                resultsPanel.classList.add('visible');
+                resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            async function sendToSheets(data) {
+                if (!GOOGLE_SHEETS_WEB_APP_URL || GOOGLE_SHEETS_WEB_APP_URL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
+                    console.warn('Sheets URL not configured. Data logged to console.');
+                    console.log('Data:', JSON.stringify(data, null, 2));
+                    return { success: true, demoMode: true, message: 'Scored (demo mode). Data in console.' };
+                }
+                try {
+                    await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(data)
+                    });
+                    return { success: true, demoMode: false, message: 'Submitted successfully!' };
+                } catch (e) {
+                    return { success: false, message: 'Network error.' };
+                }
+            }
+
+            function validateForm() {
+                clearAllErrors();
+                let valid = true;
+                if (!student1Input.value.trim()) { fieldStudent1.classList.add('error'); valid = false; }
+                if (!student2Input.value.trim()) { fieldStudent2.classList.add('error'); valid = false; }
+                if (!validateRanks()) { rankError.style.display = 'block'; valid = false; }
+                if (!justificationInput.value.trim()) {
+                    fieldJustification.classList.add('error'); valid = false;
+                } else {
+                    const just = normalizeText(justificationInput.value);
+                    const sentences = just.split(/[.!?]+/).filter(s => s.trim().length > 3);
+                    if (sentences.length > 1) {
+                        fieldJustification.classList.add('error');
+                        showToast('⚠️ Justification must be ONE sentence.', 'error');
+                        valid = false;
+                    }
+                }
+                if (!paragraphInput.value.trim()) { fieldParagraph.classList.add('error'); valid = false; }
+                return valid;
+            }
+
+            btnSubmit.addEventListener('click', async function() {
+                if (!validateForm()) {
+                    showToast('⚠️ Please fix the highlighted fields.', 'error');
+                    const firstErr = document.querySelector('.field.error');
+                    if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                btnSubmit.disabled = true;
+                btnSubmit.innerHTML = '<span class="spinner" style="display:inline-block;"></span> Scoring...';
+                await new Promise(r => setTimeout(r, 400));
+
+                const rankingData = getRankingOrder();
+                const paragraphText = normalizeText(paragraphInput.value);
+                const justificationText = normalizeText(justificationInput.value);
+                const result = scoreParagraph(paragraphText, rankingData);
+
+                const sheetData = {
+                    timestamp: new Date().toISOString(),
+                    student1: student1Input.value.trim(),
+                    student2: student2Input.value.trim(),
+                    rankingLeastEffective: rankingData?.leastEffective ?? '',
+                    rankingModerate: rankingData?.order[1] ?? '',
+                    rankingMostEffective: rankingData?.mostEffective ?? '',
+                    rankingJustification: justificationText,
+                    paragraph: paragraphText,
+                    sentenceCount: result.sentenceCount,
+                    transitionsFound: result.transitionsFound.join('; '),
+                    transitionsCount: result.transitionsFound.length,
+                    totalScore: result.totalScore,
+                    maxScore: result.maxTotal,
+                    percentage: Math.round((result.totalScore/result.maxTotal)*100),
+                    breakdownScores: result.breakdown.map(b => `${b.label}: ${b.score}/${b.max}`).join(' | ')
+                };
+
+                const sheetResp = await sendToSheets(sheetData);
+                displayResults(result);
+                btnSubmit.disabled = false;
+                btnSubmit.innerHTML = '<span class="spinner"></span> ✅ Submit for Scoring';
+                if (sheetResp.success) {
+                    showToast(sheetResp.demoMode ? '✅ Scored (demo). Check console.' : '✅ Submitted & saved!', 'success');
+                } else {
+                    showToast('⚠️ Scoring done, but save failed.', 'error');
+                }
+            });
+
+            paragraphInput.addEventListener('input', function() {
+                const count = countSentences(paragraphInput.value);
+                liveSentenceCount.textContent = `📏 Detected ~${count} sentence(s). Aim for 8–10.`;
+                if (count >= 8 && count <= 10) liveSentenceCount.style.color = 'var(--success)';
+                else if (count >= 6 && count <= 12) liveSentenceCount.style.color = '#e0a030';
+                else liveSentenceCount.style.color = 'var(--danger)';
+            });
+
+            updateBadges();
+        })();
+    </script>
+</body>
+</html>
